@@ -30,9 +30,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     if (!question) return { title: "Question Not Found" };
 
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://preptracker.example.com';
     return {
         title: `${question.title} - ${companyName} Interview Question (2025)`,
         description: `Prepare for your ${companyName} interview. Solve "${question.title}" which is frequently asked in ${companyName} Online Assessments.`,
+        alternates: {
+            canonical: `${baseUrl}/question/${question.slug}`,
+        }
     };
 }
 
